@@ -76,13 +76,10 @@ class MockData {
       skills: [
         'Creative Photography',
         'Media Management',
-        'Videography',
         'Content Creation',
         'Social Media Management',
-        'Photo Retouching',
         'Video Editing',
         'Visual Storytelling',
-        'Creative Direction',
         'Brand Content Strategy',
       ],
       linkedInUrl: 'https://linkedin.com',
