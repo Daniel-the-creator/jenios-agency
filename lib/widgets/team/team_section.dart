@@ -399,75 +399,79 @@ class _MemberProfileDialog extends StatelessWidget {
               ),
             ),
             // Body
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'About',
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
-                      color: AppColors.textDark,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    member.bio,
-                    style: GoogleFonts.poppins(
-                      color: AppColors.textLight,
-                      fontSize: 13,
-                      height: 1.7,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Skills',
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
-                      color: AppColors.textDark,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: member.skills
-                        .map((s) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 5),
-                              decoration: BoxDecoration(
-                                color: AppColors.primaryLight,
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: Text(
-                                s,
-                                style: GoogleFonts.poppins(
-                                  color: AppColors.primary,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                  ),
-                  if (member.linkedInUrl != null) ...[
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final uri = Uri.parse(member.linkedInUrl!);
-                          if (await canLaunchUrl(uri)) launchUrl(uri);
-                        },
-                        icon: const Icon(Icons.link_rounded, size: 18),
-                        label: const Text('View LinkedIn'),
+            Flexible(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'About',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15,
+                          color: AppColors.textDark,
+                        ),
                       ),
-                    ),
-                  ],
-                ],
+                      const SizedBox(height: 8),
+                      Text(
+                        member.bio,
+                        style: GoogleFonts.poppins(
+                          color: AppColors.textLight,
+                          fontSize: 13,
+                          height: 1.7,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        'Skills',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15,
+                          color: AppColors.textDark,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: member.skills
+                            .map((s) => Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 5),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primaryLight,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Text(
+                                    s,
+                                    style: GoogleFonts.poppins(
+                                      color: AppColors.primary,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                      ),
+                      if (member.linkedInUrl != null) ...[
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            onPressed: () async {
+                              final uri = Uri.parse(member.linkedInUrl!);
+                              if (await canLaunchUrl(uri)) launchUrl(uri);
+                            },
+                            icon: const Icon(Icons.link_rounded, size: 18),
+                            label: const Text('View LinkedIn'),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
