@@ -173,7 +173,7 @@ class _ContactColumn extends StatelessWidget {
       children: [
         _FooterInfo(icon: Icons.location_on_rounded, text: 'Lagos, Nigeria'),
         _FooterInfo(icon: Icons.phone_rounded, text: '+234 812 8928 518'),
-        _FooterInfo(icon: Icons.email_rounded, text: 'hello@jenios.com'),
+        _FooterInfo(icon: Icons.email_rounded, text: 'Jeniousagency@gmail.com'),
       ],
     );
   }
