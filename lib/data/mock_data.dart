@@ -64,7 +64,8 @@ class MockData {
         'Node.js',
         'Flask',
       ],
-      linkedInUrl: 'https://linkedin.com',
+      linkedInUrl:
+          'https://www.linkedin.com/in/akigbogun-christopher-6a55b3422?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     ),
     TeamMemberModel(
       id: '2',
