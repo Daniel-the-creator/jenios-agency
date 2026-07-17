@@ -120,7 +120,8 @@ class MockData {
         'Graphic Design',
         'WordPress',
       ],
-      linkedInUrl: 'https://linkedin.com',
+      linkedInUrl:
+          'https://www.linkedin.com/in/ademola-victor-17b5b4276?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     ),
     TeamMemberModel(
       id: '4',
