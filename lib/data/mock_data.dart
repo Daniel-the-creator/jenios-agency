@@ -82,7 +82,8 @@ class MockData {
         'Visual Storytelling',
         'Brand Content Strategy',
       ],
-      linkedInUrl: 'https://linkedin.com',
+      linkedInUrl:
+          'https://www.linkedin.com/in/david-odigie-37b628307?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
     ),
     TeamMemberModel(
       id: '3',
@@ -100,7 +101,8 @@ class MockData {
         'css',
         'javascript',
       ],
-      linkedInUrl: 'https://linkedin.com',
+      linkedInUrl:
+          'https://www.linkedin.com/in/daniel-ilesanmi-2745a1322/?trk=public-profile-join-page',
     ),
     TeamMemberModel(
       id: '3',
