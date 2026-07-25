@@ -41,8 +41,10 @@ class _JourneySectionState extends State<JourneySection>
 
   void _onVisible() {
     if (_visible) return;
-    _visible = true;
-    _lineController.forward();
+    if (mounted) {
+      setState(() => _visible = true);
+      _lineController.forward();
+    }
   }
 
   @override
@@ -54,7 +56,7 @@ class _JourneySectionState extends State<JourneySection>
     return VisibilityDetector(
       key: const Key('journey-section'),
       onVisibilityChanged: (info) {
-        if (info.visibleFraction > 0.2) _onVisible();
+        if (info.visibleFraction > 0.05) _onVisible();
       },
       child: Container(
         key: scrollService.journeyKey,
@@ -180,88 +182,101 @@ class _VerticalTimeline extends StatelessWidget {
       children: milestones.asMap().entries.map((entry) {
         final i = entry.key;
         final m = entry.value;
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        final delay = Duration(milliseconds: i * 150);
+
+        return AnimatedOpacity(
+          opacity: visible ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeOut,
+          child: AnimatedSlide(
+            offset: visible ? Offset.zero : const Offset(-0.05, 0),
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeOut,
+            child: _buildVerticalItem(i, m, delay),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildVerticalItem(int i, JourneyMilestone m, Duration delay) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Line + dot
+        Column(
           children: [
-            // Line + dot
-            Column(
-              children: [
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: AppColors.primaryGradient,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primary.withValues(alpha: 0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      )
-                    ],
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: AppColors.primaryGradient,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primary.withValues(alpha: 0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  )
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  '${i + 1}',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
                   ),
-                  child: Center(
-                    child: Text(
-                      '${i + 1}',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
-                if (i < milestones.length - 1)
-                  Container(
-                    width: 2,
-                    height: 80,
-                    color: AppColors.border,
-                  ),
-              ],
-            ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 6),
-                    Text(
-                      m.year,
-                      style: GoogleFonts.poppins(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 13,
-                      ),
-                    ),
-                    Text(
-                      m.title,
-                      style: GoogleFonts.poppins(
-                        color: AppColors.textDark,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      m.description,
-                      style: GoogleFonts.poppins(
-                        color: AppColors.textLight,
-                        fontSize: 13,
-                        height: 1.6,
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ),
+            if (i < milestones.length - 1)
+              Container(
+                width: 2,
+                height: 80,
+                color: AppColors.border,
+              ),
           ],
-        )
-            .animate(target: visible ? 1 : 0)
-            .fadeIn(delay: Duration(milliseconds: i * 150))
-            .slideX(begin: -0.05, end: 0);
-      }).toList(),
+        ),
+        const SizedBox(width: 20),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 6),
+                Text(
+                  m.year,
+                  style: GoogleFonts.poppins(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                  ),
+                ),
+                Text(
+                  m.title,
+                  style: GoogleFonts.poppins(
+                    color: AppColors.textDark,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  m.description,
+                  style: GoogleFonts.poppins(
+                    color: AppColors.textLight,
+                    fontSize: 13,
+                    height: 1.6,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -288,104 +303,112 @@ class _MilestoneCardState extends State<_MilestoneCard> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      child: Padding(
-        padding: EdgeInsets.only(right: widget.isLast ? 0 : 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Dot
-            Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: AppColors.primaryGradient,
-                boxShadow: _hovered
-                    ? [
-                        BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.4),
-                          blurRadius: 12,
-                          offset: const Offset(0, 4),
-                        )
-                      ]
-                    : [],
-              ),
-              child: Center(
-                child: Text(
-                  '${widget.index + 1}',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
+    return AnimatedOpacity(
+      opacity: widget.visible ? 1.0 : 0.0,
+      duration: Duration(milliseconds: 500 + widget.index * 100),
+      curve: Curves.easeOut,
+      child: AnimatedSlide(
+        offset: widget.visible ? Offset.zero : const Offset(0, 0.08),
+        duration: Duration(milliseconds: 500 + widget.index * 100),
+        curve: Curves.easeOut,
+        child: MouseRegion(
+          onEnter: (_) => setState(() => _hovered = true),
+          onExit: (_) => setState(() => _hovered = false),
+          child: Padding(
+            padding: EdgeInsets.only(right: widget.isLast ? 0 : 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Dot
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: AppColors.primaryGradient,
+                    boxShadow: _hovered
+                        ? [
+                            BoxShadow(
+                              color: AppColors.primary.withValues(alpha: 0.4),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            )
+                          ]
+                        : [],
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${widget.index + 1}',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            // Card
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: _hovered ? AppColors.primaryLight : Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color:
-                      _hovered ? AppColors.primary.withValues(alpha: 0.3) : AppColors.border,
+                const SizedBox(height: 20),
+                // Card
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: _hovered ? AppColors.primaryLight : Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: _hovered
+                          ? AppColors.primary.withValues(alpha: 0.3)
+                          : AppColors.border,
+                    ),
+                    boxShadow: _hovered
+                        ? [
+                            BoxShadow(
+                              color: AppColors.primary.withValues(alpha: 0.1),
+                              blurRadius: 16,
+                              offset: const Offset(0, 4),
+                            )
+                          ]
+                        : [],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.milestone.year,
+                        style: GoogleFonts.poppins(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 13,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.milestone.title,
+                        style: GoogleFonts.poppins(
+                          color: AppColors.textDark,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        widget.milestone.description,
+                        style: GoogleFonts.poppins(
+                          color: AppColors.textLight,
+                          fontSize: 12.5,
+                          height: 1.65,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                boxShadow: _hovered
-                    ? [
-                        BoxShadow(
-                          color: AppColors.primary.withValues(alpha: 0.1),
-                          blurRadius: 16,
-                          offset: const Offset(0, 4),
-                        )
-                      ]
-                    : [],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.milestone.year,
-                    style: GoogleFonts.poppins(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 13,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    widget.milestone.title,
-                    style: GoogleFonts.poppins(
-                      color: AppColors.textDark,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    widget.milestone.description,
-                    style: GoogleFonts.poppins(
-                      color: AppColors.textLight,
-                      fontSize: 12.5,
-                      height: 1.65,
-                    ),
-                  ),
-                ],
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
-    )
-        .animate(target: widget.visible ? 1 : 0)
-        .fadeIn(delay: Duration(milliseconds: widget.index * 200))
-        .slideY(begin: 0.1, end: 0);
+    );
   }
 }
 

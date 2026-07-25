@@ -143,6 +143,16 @@ class MockData {
       skills: ['Figma', 'User Research', 'Prototyping', 'Design Systems'],
       linkedInUrl: 'https://linkedin.com',
     ),
+    TeamMemberModel(
+      id: '5',
+      name: 'Olasupo francis',
+      role: 'Designer',
+      avatarUrl: '',
+      bio:
+          'A creative designer who transforms complex problems into intuitive, beautiful interfaces. Passionate about user research and design systems.',
+      skills: ['Figma', 'graphics design', 'photo editing', 'Design Systems'],
+      linkedInUrl: 'https://linkedin.com',
+    ),
   ];
 
   static List<TestimonialModel> get testimonials => [

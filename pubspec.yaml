@@ -16,6 +16,7 @@ dependencies:
   visibility_detector: ^0.4.0+2
   url_launcher: ^6.3.0
   smooth_page_indicator: ^1.1.0
+  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:
