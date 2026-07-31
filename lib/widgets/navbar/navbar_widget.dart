@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_notifier.dart';
 import '../../utils/scroll_service.dart';
 
 class NavbarWidget extends StatefulWidget {
@@ -62,16 +63,19 @@ class _NavbarWidgetState extends State<NavbarWidget> {
   Widget build(BuildContext context) {
     final isWide = MediaQuery.of(context).size.width > 900;
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final navBg = isDark ? const Color(0xFF0D1B2A) : Colors.white;
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         color: _isScrolled
-            ? Colors.white.withValues(alpha: 0.97)
-            : Colors.white.withValues(alpha: 0.85),
+            ? navBg.withValues(alpha: 0.97)
+            : navBg.withValues(alpha: 0.85),
         boxShadow: _isScrolled
             ? [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
+                  color: Colors.black.withValues(alpha: 0.12),
                   blurRadius: 20,
                   offset: const Offset(0, 4),
                 ),
@@ -101,9 +105,12 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                         onTap: () => _navigateTo(item.section),
                       ),
                     ),
-                    const SizedBox(width: 24),
+                    const SizedBox(width: 16),
+                    const _ThemeToggleButton(),
+                    const SizedBox(width: 16),
                     _GetInTouchButton(onTap: () => _navigateTo('contact')),
                   ] else ...[
+                    const _ThemeToggleButton(),
                     IconButton(
                       onPressed: () =>
                           setState(() => _mobileMenuOpen = !_mobileMenuOpen),
@@ -112,7 +119,9 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                         child: Icon(
                           _mobileMenuOpen ? Icons.close : Icons.menu,
                           key: ValueKey(_mobileMenuOpen),
-                          color: AppColors.textDark,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : AppColors.textDark,
                         ),
                       ),
                     ),
@@ -249,9 +258,10 @@ class _MobileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       width: double.infinity,
-      color: Colors.white,
+      color: isDark ? const Color(0xFF0D1B2A) : Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,7 +276,7 @@ class _MobileMenu extends StatelessWidget {
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textDark,
+                    color: isDark ? Colors.white : AppColors.textDark,
                   ),
                 ),
               ),
@@ -283,6 +293,106 @@ class _MobileMenu extends StatelessWidget {
           const SizedBox(height: 8),
         ],
       ),
+    );
+  }
+}
+
+/// Animated sun/moon toggle button that switches between light and dark mode.
+class _ThemeToggleButton extends StatelessWidget {
+  const _ThemeToggleButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: ThemeNotifier.instance,
+      builder: (context, mode, _) {
+        final isDark = mode == ThemeMode.dark;
+        return Tooltip(
+          message: isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode',
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: ThemeNotifier.instance.toggle,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 350),
+                curve: Curves.easeInOut,
+                width: 52,
+                height: 28,
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: isDark
+                      ? AppColors.primary.withValues(alpha: 0.85)
+                      : const Color(0xFFE5E7EB),
+                  boxShadow: [
+                    BoxShadow(
+                      color: isDark
+                          ? AppColors.primary.withValues(alpha: 0.3)
+                          : Colors.black.withValues(alpha: 0.08),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  children: [
+                    // Track icons
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 2),
+                        child: Icon(
+                          Icons.wb_sunny_rounded,
+                          size: 14,
+                          color: isDark
+                              ? Colors.white.withValues(alpha: 0.4)
+                              : const Color(0xFFFBBF24),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 2),
+                        child: Icon(
+                          Icons.nightlight_round,
+                          size: 13,
+                          color: isDark
+                              ? Colors.white
+                              : Colors.grey.withValues(alpha: 0.4),
+                        ),
+                      ),
+                    ),
+                    // Sliding thumb
+                    AnimatedAlign(
+                      duration: const Duration(milliseconds: 350),
+                      curve: Curves.easeInOut,
+                      alignment: isDark
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Container(
+                        width: 22,
+                        height: 22,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.15),
+                              blurRadius: 4,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
