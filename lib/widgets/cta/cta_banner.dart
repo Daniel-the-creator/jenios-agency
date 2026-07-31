@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_colors.dart';
 import '../../utils/scroll_service.dart';
 import '../../utils/email_service.dart';
 
@@ -248,18 +249,18 @@ class _CtaBannerState extends State<CtaBanner>
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
-      style: GoogleFonts.poppins(color: AppColors.textDark, fontSize: 14),
+      style: GoogleFonts.poppins(color: context.textDarkColor, fontSize: 14),
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: GoogleFonts.poppins(
-          color: AppColors.textLight,
+          color: context.textLightColor,
           fontSize: 13.5,
         ),
         prefixIcon: maxLines == 1
             ? Icon(icon, color: AppColors.primary, size: 18)
             : null,
         filled: true,
-        fillColor: Colors.white,
+        fillColor: context.cardColor,
         contentPadding: EdgeInsets.symmetric(
           horizontal: 18,
           vertical: maxLines > 1 ? 16 : 14,

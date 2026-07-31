@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_colors.dart';
 import '../../utils/scroll_service.dart';
 
 class FooterWidget extends StatelessWidget {
@@ -13,7 +14,7 @@ class FooterWidget extends StatelessWidget {
     final isMedium = MediaQuery.of(context).size.width > 600;
 
     return Container(
-      color: AppColors.darkBg,
+      color: context.isDark ? const Color(0xFF09131D) : AppColors.darkBg,
       padding: EdgeInsets.only(
         left: isWide ? 80 : 28,
         right: isWide ? 80 : 28,

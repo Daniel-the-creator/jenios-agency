@@ -6,6 +6,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../data/mock_data.dart';
 import '../../models/team_member_model.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_colors.dart';
 import '../../utils/scroll_service.dart';
 
 class TeamSection extends StatefulWidget {
@@ -34,7 +35,7 @@ class _TeamSectionState extends State<TeamSection> {
       },
       child: Container(
         key: scrollService.teamKey,
-        color: AppColors.background,
+        color: context.bgColor,
         padding: EdgeInsets.symmetric(
           horizontal: isWide ? 80 : 24,
           vertical: 80,
@@ -53,7 +54,7 @@ class _TeamSectionState extends State<TeamSection> {
                   style: GoogleFonts.poppins(
                     fontSize: isWide ? 36 : 28,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textDark,
+                    color: context.textDarkColor,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -61,7 +62,7 @@ class _TeamSectionState extends State<TeamSection> {
                   'Talented professionals dedicated to your success.',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
-                    color: AppColors.textLight,
+                    color: context.textLightColor,
                   ),
                 ),
               ],
@@ -104,7 +105,7 @@ class _TeamSectionState extends State<TeamSection> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 12),
                     decoration: BoxDecoration(
-                      color: isHovered ? AppColors.primaryLight : Colors.transparent,
+                      color: isHovered ? context.tagBgColor : Colors.transparent,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -118,8 +119,8 @@ class _TeamSectionState extends State<TeamSection> {
                             fontWeight:
                                 isHovered ? FontWeight.w700 : FontWeight.w500,
                             color: isHovered
-                                ? AppColors.textDark
-                                : AppColors.textMedium,
+                                ? AppColors.primary
+                                : context.textDarkColor,
                           ),
                         ),
                       ],
@@ -152,7 +153,7 @@ class _TeamSectionState extends State<TeamSection> {
                     fontWeight: FontWeight.w800,
                     color: isHovered
                         ? AppColors.primary
-                        : AppColors.textDark.withValues(alpha: 0.15),
+                        : context.textDarkColor.withValues(alpha: 0.2),
                     letterSpacing: -0.5,
                   ),
                   child: Padding(
@@ -188,9 +189,9 @@ class _TeamSectionState extends State<TeamSection> {
           onTap: () => _showMemberProfile(member),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.cardColor,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.border),
+              border: Border.all(color: context.borderColor),
             ),
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -204,7 +205,7 @@ class _TeamSectionState extends State<TeamSection> {
                   style: GoogleFonts.poppins(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textDark,
+                    color: context.textDarkColor,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -314,8 +315,9 @@ class _MemberProfileDialog extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(maxWidth: 480),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.cardColor,
           borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: context.borderColor),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.15),
@@ -411,14 +413,14 @@ class _MemberProfileDialog extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w700,
                           fontSize: 15,
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         member.bio,
                         style: GoogleFonts.poppins(
-                          color: AppColors.textLight,
+                          color: context.textLightColor,
                           fontSize: 13,
                           height: 1.7,
                         ),
@@ -429,7 +431,7 @@ class _MemberProfileDialog extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w700,
                           fontSize: 15,
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -441,7 +443,7 @@ class _MemberProfileDialog extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 5),
                                   decoration: BoxDecoration(
-                                    color: AppColors.primaryLight,
+                                    color: context.tagBgColor,
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                   child: Text(
@@ -490,7 +492,7 @@ class _SectionTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
+        color: context.tagBgColor,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Text(

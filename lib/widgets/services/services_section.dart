@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_colors.dart';
 import '../../utils/scroll_service.dart';
 
 class ServicesSection extends StatefulWidget {
@@ -81,7 +82,7 @@ class _ServicesSectionState extends State<ServicesSection> {
       },
       child: Container(
         key: scrollService.servicesKey,
-        color: AppColors.surface,
+        color: context.surfaceColor,
         padding: EdgeInsets.symmetric(
           horizontal: isWide ? 80 : 24,
           vertical: 80,
@@ -100,7 +101,7 @@ class _ServicesSectionState extends State<ServicesSection> {
                   style: GoogleFonts.poppins(
                     fontSize: isWide ? 36 : 28,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textDark,
+                    color: context.textDarkColor,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -108,7 +109,7 @@ class _ServicesSectionState extends State<ServicesSection> {
                   'End-to-end digital solutions to help your business thrive.',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
-                    color: AppColors.textLight,
+                    color: context.textLightColor,
                   ),
                 ),
               ],
@@ -208,12 +209,12 @@ class _ServiceCardState extends State<_ServiceCard> {
         transform: Matrix4.translationValues(0, _hovered ? -6 : 0, 0),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: _hovered ? Colors.white : Colors.white,
+          color: context.cardColor,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: _hovered
                 ? widget.service.gradientColors[0].withValues(alpha: 0.4)
-                : AppColors.border,
+                : context.borderColor,
             width: _hovered ? 1.5 : 1,
           ),
           boxShadow: _hovered
@@ -265,7 +266,7 @@ class _ServiceCardState extends State<_ServiceCard> {
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textDark,
+                color: context.textDarkColor,
               ),
             ),
             const SizedBox(height: 8),
@@ -275,7 +276,7 @@ class _ServiceCardState extends State<_ServiceCard> {
                 widget.service.description,
                 style: GoogleFonts.poppins(
                   fontSize: 12.5,
-                  color: AppColors.textLight,
+                  color: context.textLightColor,
                   height: 1.65,
                 ),
                 overflow: TextOverflow.fade,
@@ -344,7 +345,7 @@ class _SectionTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
+        color: context.tagBgColor,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Text(

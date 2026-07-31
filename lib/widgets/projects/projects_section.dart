@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_colors.dart';
 import '../../data/mock_data.dart';
 import '../../models/project_model.dart';
 import '../../utils/scroll_service.dart';
@@ -20,7 +21,7 @@ class ProjectsSection extends StatelessWidget {
 
     return Container(
       key: scrollService.projectsKey,
-      color: AppColors.background,
+      color: context.bgColor,
       padding: EdgeInsets.symmetric(
         horizontal: isWide ? 80 : 24,
         vertical: 80,
@@ -43,7 +44,7 @@ class ProjectsSection extends StatelessWidget {
                       style: GoogleFonts.poppins(
                         fontSize: isWide ? 36 : 28,
                         fontWeight: FontWeight.w800,
-                        color: AppColors.textDark,
+                        color: context.textDarkColor,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -51,7 +52,7 @@ class ProjectsSection extends StatelessWidget {
                       'Transformative digital solutions we\'ve crafted for our clients.',
                       style: GoogleFonts.poppins(
                         fontSize: 15,
-                        color: AppColors.textLight,
+                        color: context.textLightColor,
                       ),
                     ),
                   ],
@@ -185,7 +186,7 @@ class _ShowAllButtonState extends State<_ShowAllButton> {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
           decoration: BoxDecoration(
-            color: _hovered ? AppColors.primary : AppColors.primaryLight,
+            color: _hovered ? AppColors.primary : context.tagBgColor,
             borderRadius: BorderRadius.circular(50),
           ),
           child: Row(
@@ -222,7 +223,7 @@ class _SectionTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
+        color: context.tagBgColor,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Text(

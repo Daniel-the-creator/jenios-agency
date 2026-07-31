@@ -5,6 +5,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../data/mock_data.dart';
 import '../../models/testimonial_model.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_colors.dart';
 import '../../utils/scroll_service.dart';
 
 class JourneySection extends StatefulWidget {
@@ -60,7 +61,7 @@ class _JourneySectionState extends State<JourneySection>
       },
       child: Container(
         key: scrollService.journeyKey,
-        color: AppColors.surface,
+        color: context.surfaceColor,
         padding: EdgeInsets.symmetric(
           horizontal: isWide ? 80 : 24,
           vertical: 80,
@@ -79,7 +80,7 @@ class _JourneySectionState extends State<JourneySection>
                   style: GoogleFonts.poppins(
                     fontSize: isWide ? 36 : 28,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textDark,
+                    color: context.textDarkColor,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -87,7 +88,7 @@ class _JourneySectionState extends State<JourneySection>
                   'From a bold vision to a growing agency — here\'s how we got here.',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
-                    color: AppColors.textLight,
+                    color: context.textLightColor,
                   ),
                 ),
               ],
@@ -192,14 +193,14 @@ class _VerticalTimeline extends StatelessWidget {
             offset: visible ? Offset.zero : const Offset(-0.05, 0),
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeOut,
-            child: _buildVerticalItem(i, m, delay),
+            child: _buildVerticalItem(context, i, m, delay),
           ),
         );
       }).toList(),
     );
   }
 
-  Widget _buildVerticalItem(int i, JourneyMilestone m, Duration delay) {
+  Widget _buildVerticalItem(BuildContext context, int i, JourneyMilestone m, Duration delay) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -235,7 +236,7 @@ class _VerticalTimeline extends StatelessWidget {
               Container(
                 width: 2,
                 height: 80,
-                color: AppColors.border,
+                color: context.borderColor,
               ),
           ],
         ),
@@ -258,7 +259,7 @@ class _VerticalTimeline extends StatelessWidget {
                 Text(
                   m.title,
                   style: GoogleFonts.poppins(
-                    color: AppColors.textDark,
+                    color: context.textDarkColor,
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   ),
@@ -267,7 +268,7 @@ class _VerticalTimeline extends StatelessWidget {
                 Text(
                   m.description,
                   style: GoogleFonts.poppins(
-                    color: AppColors.textLight,
+                    color: context.textLightColor,
                     fontSize: 13,
                     height: 1.6,
                   ),
@@ -353,12 +354,12 @@ class _MilestoneCardState extends State<_MilestoneCard> {
                   duration: const Duration(milliseconds: 200),
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: _hovered ? AppColors.primaryLight : Colors.white,
+                    color: _hovered ? context.tagBgColor : context.cardColor,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: _hovered
                           ? AppColors.primary.withValues(alpha: 0.3)
-                          : AppColors.border,
+                          : context.borderColor,
                     ),
                     boxShadow: _hovered
                         ? [
@@ -386,7 +387,7 @@ class _MilestoneCardState extends State<_MilestoneCard> {
                       Text(
                         widget.milestone.title,
                         style: GoogleFonts.poppins(
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 15,
                         ),
@@ -395,7 +396,7 @@ class _MilestoneCardState extends State<_MilestoneCard> {
                       Text(
                         widget.milestone.description,
                         style: GoogleFonts.poppins(
-                          color: AppColors.textLight,
+                          color: context.textLightColor,
                           fontSize: 12.5,
                           height: 1.65,
                         ),
@@ -421,7 +422,7 @@ class _SectionTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
+        color: context.tagBgColor,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Text(

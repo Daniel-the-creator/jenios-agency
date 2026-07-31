@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../models/project_model.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_colors.dart';
 
 class ProjectDetailDialog extends StatelessWidget {
   final ProjectModel project;
@@ -22,8 +23,9 @@ class ProjectDetailDialog extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(maxWidth: 700),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.cardColor,
           borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: context.borderColor),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.15),
@@ -144,7 +146,7 @@ class ProjectDetailDialog extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -152,7 +154,7 @@ class ProjectDetailDialog extends StatelessWidget {
                         project.description,
                         style: GoogleFonts.poppins(
                           fontSize: 14,
-                          color: AppColors.textLight,
+                          color: context.textLightColor,
                           height: 1.7,
                         ),
                       ),
@@ -162,7 +164,7 @@ class ProjectDetailDialog extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -221,7 +223,7 @@ class _TechChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
+        color: context.tagBgColor,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Text(

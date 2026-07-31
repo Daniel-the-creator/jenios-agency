@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/theme_colors.dart';
 import '../../utils/scroll_service.dart';
 
 class HeroSection extends StatefulWidget {
@@ -79,9 +80,22 @@ class _HeroSectionState extends State<HeroSection>
     final isWide = MediaQuery.of(context).size.width > 900;
     final scrollService = ScrollService();
 
+    final isDark = context.isDark;
     return Container(
       key: scrollService.heroKey,
-      decoration: const BoxDecoration(gradient: AppColors.heroGradient),
+      decoration: BoxDecoration(
+        gradient: isDark
+            ? LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppColors.darkBg,
+                  const Color(0xFF0F2236),
+                  AppColors.darkBg,
+                ],
+              )
+            : AppColors.heroGradient,
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: isWide ? 80 : 24,
@@ -156,7 +170,7 @@ class _HeroSectionState extends State<HeroSection>
                   TextSpan(
                     text: 'Turning ',
                     style: GoogleFonts.poppins(
-                      color: AppColors.textDark,
+                      color: context.textDarkColor,
                       fontWeight: FontWeight.w800,
                       fontSize: 48,
                       height: 1.15,
@@ -176,7 +190,7 @@ class _HeroSectionState extends State<HeroSection>
                   TextSpan(
                     text: '\nInto Digital\nReality',
                     style: GoogleFonts.poppins(
-                      color: AppColors.textDark,
+                      color: context.textDarkColor,
                       fontWeight: FontWeight.w800,
                       fontSize: 48,
                       height: 1.15,
@@ -192,7 +206,7 @@ class _HeroSectionState extends State<HeroSection>
         Text(
               'We build powerful, beautiful digital experiences that\ngrow your business. From concept to launch, we\'ve got\nyou covered.',
               style: GoogleFonts.poppins(
-                color: AppColors.textLight,
+                color: context.textLightColor,
                 fontSize: 16,
                 height: 1.7,
               ),
@@ -292,8 +306,9 @@ class _HeroSectionState extends State<HeroSection>
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 32),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.cardColor,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: context.borderColor),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.06),
@@ -374,7 +389,7 @@ class _StatWidget extends StatelessWidget {
           label,
           style: GoogleFonts.poppins(
             fontSize: 13,
-            color: AppColors.textLight,
+            color: context.textLightColor,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -467,7 +482,7 @@ class _FloatingBadge extends StatelessWidget {
     return Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: context.cardColor,
             borderRadius: BorderRadius.circular(50),
             boxShadow: [
               BoxShadow(
@@ -487,7 +502,7 @@ class _FloatingBadge extends StatelessWidget {
                 style: GoogleFonts.poppins(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textDark,
+                  color: context.textDarkColor,
                 ),
               ),
             ],
