@@ -58,7 +58,6 @@ class ProjectsSection extends StatelessWidget {
                   ],
                 ),
               ),
-              if (isWide) _ShowAllButton(),
             ],
           )
               .animate()
@@ -71,10 +70,6 @@ class ProjectsSection extends StatelessWidget {
               : isMedium
                   ? _buildMediumGrid(projects, context)
                   : _buildNarrowList(projects, context),
-          if (!isWide) ...[
-            const SizedBox(height: 28),
-            Center(child: _ShowAllButton()),
-          ],
         ],
       ),
     );
@@ -162,54 +157,6 @@ class ProjectsSection extends StatelessWidget {
     showDialog(
       context: context,
       builder: (_) => ProjectDetailDialog(project: project),
-    );
-  }
-}
-
-class _ShowAllButton extends StatefulWidget {
-  @override
-  State<_ShowAllButton> createState() => _ShowAllButtonState();
-}
-
-class _ShowAllButtonState extends State<_ShowAllButton> {
-  bool _hovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {},
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
-          decoration: BoxDecoration(
-            color: _hovered ? AppColors.primary : context.tagBgColor,
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Show All',
-                style: GoogleFonts.poppins(
-                  color: _hovered ? Colors.white : AppColors.primary,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                ),
-              ),
-              const SizedBox(width: 6),
-              Icon(
-                Icons.arrow_forward_rounded,
-                size: 16,
-                color: _hovered ? Colors.white : AppColors.primary,
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
