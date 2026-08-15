@@ -158,7 +158,11 @@ class _TeamSectionState extends State<TeamSection> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 12),
-                    child: Text(member.role),
+                    child: Text(
+                      member.role,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                    ),
                   ),
                 ),
               )
@@ -212,6 +216,8 @@ class _TeamSectionState extends State<TeamSection> {
                 Text(
                   member.role,
                   textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
                     fontSize: 11,
                     color: AppColors.primary,

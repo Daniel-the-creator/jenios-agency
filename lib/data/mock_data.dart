@@ -71,7 +71,7 @@ class MockData {
     ),
     TeamMemberModel(
       id: '2',
-      name: 'David Odige',
+      name: 'David Odigie',
       role: 'Media Manager',
       avatarUrl: '',
       bio:
