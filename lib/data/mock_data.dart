@@ -129,12 +129,12 @@ class MockData {
     TeamMemberModel(
       id: '5',
       name: 'Akintayo Isreal',
-      role: 'Cyber Security Analyst',
+      role: 'Graphics Designer | 3D animator and Cyber Security Analyst ',
       avatarUrl: '',
       bio:
-          'Dedicated security professional protecting digital assets. Specializes in penetration testing, vulnerability assessments, and security audits.',
+          'Multi-disciplinary professional with expertise across Graphics Design, 3D Animation, and Cyber Security. Proficient in Blender, UE5, Maya, Illustrator, Photoshop, plus hands-on experience with Cyber Security tools. I design, animate, and defend, bringing both creative vision and security-first thinking to every project.',
       skills: ['Pen Testing', 'SIEM', 'Network Security', 'ISO 27001'],
-      linkedInUrl: 'https://linkedin.com',
+      linkedInUrl: 'http://linkedin.com/in/israel-akintayo-7b8b84269/details',
     ),
     TeamMemberModel(
       id: '6',
@@ -152,9 +152,18 @@ class MockData {
       role: 'Motion Graphics Designer',
       avatarUrl: '',
       bio:
-          'A creative designer who transforms complex problems into intuitive, beautiful interfaces.Also, involved in motion graphics, animation and 3d graphics design. Passionate about user research and design systems.',
-      skills: ['Figma', 'graphics design', 'photo editing', 'Design Systems'],
-      linkedInUrl: 'https://linkedin.com',
+          'A multidisciplinary visual creative specializing in Motion Design, Video Editing, Cinematography, and Photography. He creates engaging visual content for brands, businesses, creators, and digital products, combining strong storytelling with creative and technical execution..',
+      skills: [
+        'Motion Design & 2D Animation',
+        'Video Editing & Post-Production',
+        'Cinematography & Videography',
+        'Photography',
+        'Short-form & Social Media Content',
+        'Promotional & Explainer Videos',
+        'Branding',
+        'Visual Storytelling',
+      ],
+      linkedInUrl: 'https://www.linkedin.com/in/francis-olasupo',
     ),
     TeamMemberModel(
       id: '8',
@@ -193,6 +202,26 @@ class MockData {
         'Threat Detection',
       ],
       linkedInUrl: 'linkedin.com/in/adebayo-adesola-337158367',
+    ),
+    TeamMemberModel(
+      id: '10',
+      name: 'Ilesanmi Emmanuel',
+      role: 'Backend Developer | Social Media & Marketing Officer',
+      avatarUrl: '',
+      bio:
+          'Versatile technology professional passionate about building reliable digital solutions and growing brands through effective technology, social media, and marketing strategies. Experienced in backend development, digital content, social media management, and creating engaging strategies that connect brands with their audiences.',
+      skills: [
+        'Backend Development',
+        'Database Management',
+        'Social Media Management',
+        'Digital Marketing',
+        'Content Strategy',
+        'Brand Communication',
+        'Software & Web Technologies',
+        'Data Management'
+            'Community Engagement',
+      ],
+      linkedInUrl: 'https://ng.linkedin.com/in/emmanuel-ilesanmi-8a717b42a',
     ),
   ];
 
