@@ -126,7 +126,10 @@ class _BrandColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Logo
-        Image.asset('assets/images/logo.png', height: 80),
+        ColorFiltered(
+          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+          child: Image.asset('assets/images/logo.png', height: 80),
+        ),
         const SizedBox(height: 16),
         Text(
           'We build powerful digital experiences that grow your business. Trusted by clients worldwide.',

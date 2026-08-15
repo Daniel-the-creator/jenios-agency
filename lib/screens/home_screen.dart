@@ -8,6 +8,7 @@ import '../widgets/journey/journey_section.dart';
 import '../widgets/team/team_section.dart';
 import '../widgets/cta/cta_banner.dart';
 import '../widgets/footer/footer_widget.dart';
+import '../widgets/video/video_section.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -39,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 72),
                 HeroSection(),
                 ServicesSection(),
+                VideoSection(),
                 ProjectsSection(),
                 JourneySection(),
                 TeamSection(),

@@ -91,7 +91,7 @@ class MockData {
     TeamMemberModel(
       id: '3',
       name: 'Daniel Ilesanmi Oluwamayowa',
-      role: 'Full-Stack web/mobile Developer',
+      role: 'Full-Stack Web | Mobile Developer',
       avatarUrl: '',
       bio:
           'Full-stack engineer passionate about building scalable web and mobile applications.',
@@ -99,6 +99,7 @@ class MockData {
         'Flutter',
         'React',
         'Node.js',
+        'Django',
         'Firebase',
         'html',
         'css',
@@ -108,7 +109,7 @@ class MockData {
           'https://www.linkedin.com/in/daniel-ilesanmi-2745a1322/?trk=public-profile-join-page',
     ),
     TeamMemberModel(
-      id: '3',
+      id: '4',
       name: 'Ademola Victor Oluokun',
       role: 'Graphic Designer | Mobile Developer',
       avatarUrl: '',
@@ -126,7 +127,7 @@ class MockData {
           'https://www.linkedin.com/in/ademola-victor-17b5b4276?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     ),
     TeamMemberModel(
-      id: '4',
+      id: '5',
       name: 'Akintayo Isreal',
       role: 'Cyber Security Analyst',
       avatarUrl: '',
@@ -136,7 +137,7 @@ class MockData {
       linkedInUrl: 'https://linkedin.com',
     ),
     TeamMemberModel(
-      id: '5',
+      id: '6',
       name: 'Emmanuel Oluwatimileyin',
       role: 'UI/UX Designer',
       avatarUrl: '',
@@ -146,14 +147,52 @@ class MockData {
       linkedInUrl: 'https://linkedin.com',
     ),
     TeamMemberModel(
-      id: '5',
+      id: '7',
       name: 'Olasupo francis',
-      role: 'Designer',
+      role: 'Motion Graphics Designer',
       avatarUrl: '',
       bio:
-          'A creative designer who transforms complex problems into intuitive, beautiful interfaces. Passionate about user research and design systems.',
+          'A creative designer who transforms complex problems into intuitive, beautiful interfaces.Also, involved in motion graphics, animation and 3d graphics design. Passionate about user research and design systems.',
       skills: ['Figma', 'graphics design', 'photo editing', 'Design Systems'],
       linkedInUrl: 'https://linkedin.com',
+    ),
+    TeamMemberModel(
+      id: '8',
+      name: 'Ifelola Adeyolanu.',
+      role: 'Product Manager',
+      avatarUrl: '',
+      bio:
+          'A strategic Product Manager who transforms chaotic concepts into user-centric solutions for fast-paced startups, forward-thinking teams, and scaling tech enterprises. specialize in providing 95% clearer direction to stalled initiatives, turning scattered momentum into active user acquisition and retention. Driven by rigorous market research and deep user empathy, build products that precisely target core pain points. Rejecting rigid frameworks, intentionally utilize the exact product tools tailored to a product specific scale, nature, and lifecycle. Ultimately, focus is on bridging visionary strategy with agile execution to ensure flawless, high-value delivery.',
+      skills: [
+        'Product Strategy and Discovery',
+        'User Research, UX Design Thinking, and User Flow Mapping',
+        'Product Road mapping and Feature Prioritization',
+        'Agile Product Delivery and Timely End-to-End Execution',
+        'Data-Driven Decision Making, Product Analytics, and A/B Testing',
+        'Growth and Product Metrics',
+        'Go-to-Market Strategy',
+        'People Management, Cross-Functional Leadership, and Stakeholder',
+        'Alignment',
+      ],
+      linkedInUrl: 'https://www.linkedin.com/in/ifelola-adeyolanu-3b387b267',
+    ),
+    TeamMemberModel(
+      id: '9',
+      name: 'Adesola Adebayo',
+      role: 'Software Tester & Cyber Security Officer',
+      avatarUrl: '',
+      bio:
+          'Cybersecurity professional passionate about building secure and reliable systems, with experience across software testing, security operations, risk management, and intelligent threat detection.',
+      skills: [
+        'Software Testing',
+        'SIEM / Wazuh',
+        'Vulnerability Assessment',
+        'Risk & Compliance',
+        'Network Security',
+        'Machine Learning',
+        'Threat Detection',
+      ],
+      linkedInUrl: 'linkedin.com/in/adebayo-adesola-337158367',
     ),
   ];
 

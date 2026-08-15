@@ -139,7 +139,15 @@ class _NavbarWidgetState extends State<NavbarWidget> {
   }
 
   Widget _buildLogo() {
-    return Image.asset('assets/images/logo.png', height: 100);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final logo = Image.asset('assets/images/logo.png', height: 100);
+    if (isDark) {
+      return ColorFiltered(
+        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        child: logo,
+      );
+    }
+    return logo;
   }
 }
 

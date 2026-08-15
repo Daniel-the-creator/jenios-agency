@@ -85,12 +85,12 @@ class _HeroSectionState extends State<HeroSection>
       key: scrollService.heroKey,
       decoration: BoxDecoration(
         gradient: isDark
-            ? LinearGradient(
+            ? const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
                   AppColors.darkBg,
-                  const Color(0xFF0F2236),
+                  Color(0xFF0F2236),
                   AppColors.darkBg,
                 ],
               )
