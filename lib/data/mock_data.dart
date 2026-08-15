@@ -201,7 +201,7 @@ class MockData {
         'Machine Learning',
         'Threat Detection',
       ],
-      linkedInUrl: 'linkedin.com/in/adebayo-adesola-337158367',
+      linkedInUrl: 'https://www.linkedin.com/in/adebayo-adesola-337158367',
     ),
     TeamMemberModel(
       id: '10',
